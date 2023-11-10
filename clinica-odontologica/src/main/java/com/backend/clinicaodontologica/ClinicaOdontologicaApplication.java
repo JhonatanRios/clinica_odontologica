@@ -19,6 +19,6 @@ public class ClinicaOdontologicaApplication {
 
 	@GetMapping
 	public String holaCamada(){
-		return "Hola sofi";
+		return "Hola sofi - cargando los DAO";
 	}
 }
