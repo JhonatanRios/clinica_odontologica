@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DomicilioDaoH2 implements IDao<Domicilio> {
-    private final Logger LOGGER = LoggerFactory.getLogger(DomicilioDaoH2.class);
     private static final String INSERT = "INSERT INTO DOMICILIOS (CALLE, NUMERO, LOCALIDAD, PROVINCIA) VALUES (?, ?, ?, ?)";
     private static final String SELECT = "SELECT * FROM DOMICILIOS";
+    private static final String UPDATE = "UPDATE PACIENTES SET CALLE = ?, NUMERO = ?, LOCALIDAD = ?, PROVINCIA = ? WHERE ID = ?";
+    private final Logger LOGGER = LoggerFactory.getLogger(DomicilioDaoH2.class);
     Connection conn;
     @Override
     public Domicilio registrar(Domicilio domicilio) {
@@ -83,7 +84,6 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
-
         } finally {
             try {
                 conn.close();
@@ -124,12 +124,42 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
                 ex.printStackTrace();
             }
         }
+
         return domicilio;
     }
 
     @Override
-    public Domicilio actualizar(Domicilio domicilio) {
-        return null;
+    public Domicilio actualizar(Domicilio domicilioModificado) {
+        conn = null;
+        try {
+            conn = H2Connection.getConnection();
+            conn.setAutoCommit(false);
+
+            PreparedStatement ps = conn.prepareStatement(UPDATE);
+            ps.setString(1, domicilioModificado.getCalle());
+            ps.setInt(2, domicilioModificado.getNumero());
+            ps.setString(3, domicilioModificado.getLocalidad());
+            ps.setString(4, domicilioModificado.getProvincia());
+            ps.setInt(6, domicilioModificado.getId());
+            ps.execute();
+
+            conn.commit();
+            LOGGER.warn("El domicilio con id " + domicilioModificado.getId() + "ha sido modificado: " + domicilioModificado);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception ex){
+                LOGGER.error("Ha ocurrido un error al intentar cerrar la bdd. " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+        return domicilioModificado;
     }
 
     private Domicilio crearObjetoDomicilio (ResultSet rs) throws SQLException {
