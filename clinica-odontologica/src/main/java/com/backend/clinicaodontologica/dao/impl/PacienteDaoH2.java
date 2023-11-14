@@ -41,9 +41,7 @@ public class PacienteDaoH2 implements IDao<Paciente> {
             pacienteRegistrado = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getDni(), paciente.getFechaIngreso(), domicilioRegistrado);
 
             ResultSet rs = ps.getGeneratedKeys();
-            while(rs.next()) {
-                pacienteRegistrado.setId(rs.getInt("id"));
-            }
+            while(rs.next()) pacienteRegistrado.setId(rs.getInt("id"));
 
             conn.commit();
             LOGGER.info("Se ha registrado el paciente: " + pacienteRegistrado);
