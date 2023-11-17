@@ -1,19 +1,27 @@
-package com.backend.clinicaodontologica.model;
+package com.backend.clinicaodontologica.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "DOMICILIOS")
 public class Domicilio {
+    /*
+        Comentario de la profe
+        json -> dto Controlador dto -> servicio dto -> entidad -> repository (dao) -> entidad a BD -> repositoy -> servicio entidad a dto -> controlador -> dto @ResposeBody (dentro de @RestController) -> json
+    */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(length = 50)
     private String calle;
+    @Column(length = 8)
     private int numero;
+    @Column(length = 50)
     private String localidad;
+    @Column(length = 50)
     private String provincia;
 
-    public Domicilio(int id, String calle, int numero, String localidad, String provincia) {
-        this.id = id;
-        this.calle = calle;
-        this.numero = numero;
-        this.localidad = localidad;
-        this.provincia = provincia;
-    }
+    public Domicilio() {}
 
     public Domicilio(String calle, int numero, String localidad, String provincia) {
         this.calle = calle;

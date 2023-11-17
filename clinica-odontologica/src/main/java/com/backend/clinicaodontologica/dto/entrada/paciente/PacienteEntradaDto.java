@@ -3,29 +3,26 @@ package com.backend.clinicaodontologica.dto.entrada.paciente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class PacienteEntradaDto {
     @NotNull(message = "El nombre del paciente no puede ser nulo")
-    @NotBlank(message = "Debe especificarse el nombre del paciente")
-    @Size(max = 50, message = "El nombre debe tener hasta 50 caracteres")
+    @NotBlank(message = "El nombre del paciente no puede quedar vacío")
+    @Size(max = 50, message = "El nombre del paciente puede tener hasta 50 caracteres")
     private String nombre;
 
-    @Size(max = 50, message = "El apellido debe tener hasta 50 caracteres")
     @NotNull(message = "El apellido del paciente no puede ser nulo")
-    @NotBlank(message = "Debe especificarse el apellido del paciente")
+    @NotBlank(message = "El apellido del paciente no puede quedar vacío")
+    @Size(max = 50, message = "El apellido del paciente puede tener hasta 50 caracteres")
     private String apellido;
 
     @NotNull(message = "El dni del paciente no puede ser nulo")
-    @Size(max = 12, message = "El nombre debe tener hasta 12 digitos")
+    @Size(max = 12, message = "El dni del paciente puede tener hasta 12 digitos")
     private Integer dni;
 
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
-    @NotNull(message = "Debe especificarse la fecha de ingreso del paciente")
+    @NotNull(message = "La fecha de ingreso del paciente no puede ser nulo")
     //@JsonProperty("fecha_ingreso")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate fechaIngreso;

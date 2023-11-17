@@ -1,26 +1,23 @@
 package com.backend.clinicaodontologica.dto.entrada.paciente;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 public class DomicilioEntradaDto {
-
-    @NotNull(message = "El campo calle no puede ser nulo")
-    @NotBlank(message = "El campo calle no puede estar en blanco")
+    @NotNull(message = "La calle del domicilo no puede ser nulo")
+    @NotBlank(message = "La calle del domicilo no puede quedar vacío")
     private String calle;
 
-    @NotNull(message = "El campo numero no puede ser nulo")
-    @Digits(integer = 8, fraction = 0, message = "El número debe tener como máximo 8 dígitos")
+    @NotNull(message = "El numero del domicilo no puede ser nulo")
+    @Digits(integer = 8, fraction = 0, message = "El número del domicilo debe tener como máximo 8 dígitos")
     //@Pattern(regexp = "\\d{1,8}", message = "El número debe tener como máximo 8 dígitos")
     private Integer numero;
 
-    @NotNull(message = "El campo localidad no puede ser nulo")
-    @NotBlank(message = "El campo localidad no puede estar en blanco")
+    @NotNull(message = "La localidad del domicilo no puede ser nulo")
+    @NotBlank(message = "La localidad del domicilo no puede quedar vacío")
     private String localidad;
 
-    @NotNull(message = "El campo provincia no puede ser nulo")
-    @NotBlank(message = "El campo provincia no puede estar en blanco")
+    @NotNull(message = "La provincia del domicilo no puede ser nulo")
+    @NotBlank(message = "La provincia del domicilo no puede quedar vacío")
     private String provincia;
 
     public DomicilioEntradaDto() {

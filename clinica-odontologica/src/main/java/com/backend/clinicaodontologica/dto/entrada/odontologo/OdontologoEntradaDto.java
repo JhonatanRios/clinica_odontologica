@@ -1,26 +1,25 @@
 package com.backend.clinicaodontologica.dto.entrada.odontologo;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.validation.constraints.*;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OdontologoEntradaDto {
-
-
-    @NotNull(message = "El campo de la matrícula no puede ser nulo")
-    @NotBlank(message = "Debe especificar la matrícula")
-    @Size(max = 12, message = "La matrícula debe tener hasta 12 digitos")
+    @NotNull(message = "La matrícula del odontólogo no puede ser nulo")
+    @NotBlank(message = "La matrícula del odontólogo no puede quedar vacío")
+    @Size(max = 12, message = "La matrícula del odontólogo puede tener hasta 12 caracteres")
     private String matricula;
 
-    @NotNull(message = "El nombre no puede ser nulo")
-    @NotBlank(message = "Debe especificar el nombre")
-    @Size(max = 50, message = "El nombre debe tener hasta 50 caracteres")
+    @NotNull(message = "El nombre del odontólogo no puede ser nulo")
+    @NotBlank(message = "El nombre del odontólogo no puede quedar vacío")
+    @Size(max = 50, message = "El nombre del odontólogo puede tener hasta 50 caracteres")
     private String nombre;
 
 
-    @NotNull(message = "El campo del apellido no puede ser nulo")
-    @NotBlank(message = "Debe especificar el apellido")
-    @Size(max = 50, message = "El apellido debe tener mínimo 50 caracteres")
+    @NotNull(message = "El apellido del odontólogo no puede ser nulo")
+    @NotBlank(message = "El apellido del odontólogo no puede quedar vacío")
+    @Size(max = 50, message = "El apellido del odontólogo puede tener hasta 50 caracteres")
     private String apellido;
 
     public OdontologoEntradaDto() {
