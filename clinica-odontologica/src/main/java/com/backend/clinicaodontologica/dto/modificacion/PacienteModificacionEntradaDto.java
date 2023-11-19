@@ -1,5 +1,6 @@
-package com.backend.clinicaodontologica.dto.entrada.paciente;
+package com.backend.clinicaodontologica.dto.modificacion;
 
+import com.backend.clinicaodontologica.dto.entrada.paciente.DomicilioEntradaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
@@ -9,7 +10,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-public class PacienteEntradaDto {
+public class PacienteModificacionEntradaDto {
+    @NotNull(message = "El id del paciente no puede ser nulo")
+    private Long id;
     @NotNull(message = "El nombre del paciente no puede ser nulo")
     @NotBlank(message = "El nombre del paciente no puede quedar vacío")
     @Size(max = 50, message = "El nombre del paciente puede tener hasta 50 caracteres")
@@ -30,14 +33,23 @@ public class PacienteEntradaDto {
     @Valid
     private DomicilioEntradaDto domicilioEntradaDto;
 
-    public PacienteEntradaDto() {}
+    public PacienteModificacionEntradaDto() {}
 
-    public PacienteEntradaDto(String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilioEntradaDto) {
+    public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilioEntradaDto) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
         this.domicilioEntradaDto = domicilioEntradaDto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {

@@ -1,4 +1,4 @@
-package com.backend.clinicaodontologica.dto.entrada.turno;
+package com.backend.clinicaodontologica.dto.modificacion;
 
 import com.backend.clinicaodontologica.entity.Odontologo;
 import com.backend.clinicaodontologica.entity.Paciente;
@@ -9,7 +9,9 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-public class TurnoEntradaDto {
+public class TurnoModificacionEntradaDto {
+    @NotNull(message = "El id del turno no puede ser nulo")
+    private Long id;
     @FutureOrPresent(message = "La fecha y hora del turno no puede ser anterior al día de hoy")
     @NotNull(message = "La fecha y hora del turno del paciente no puede ser nulo")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -21,12 +23,21 @@ public class TurnoEntradaDto {
     @Valid
     private Paciente paciente;
 
-    public TurnoEntradaDto() {}
+    public TurnoModificacionEntradaDto() {}
 
-    public TurnoEntradaDto(LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+    public TurnoModificacionEntradaDto(Long id, LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+        this.id = id;
         this.fechaYHora = fechaYHora;
         this.odontologo = odontologo;
         this.paciente = paciente;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getFechaYHora() {

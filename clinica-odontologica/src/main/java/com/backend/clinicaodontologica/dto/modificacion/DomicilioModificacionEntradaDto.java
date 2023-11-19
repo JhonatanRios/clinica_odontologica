@@ -1,10 +1,12 @@
-package com.backend.clinicaodontologica.dto.entrada.paciente;
+package com.backend.clinicaodontologica.dto.modificacion;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class DomicilioEntradaDto {
+public class DomicilioModificacionEntradaDto {
+    @NotNull(message = "El id del domicilo no puede ser nulo")
+    private Long id;
     @NotNull(message = "La calle del domicilo no puede ser nulo")
     @NotBlank(message = "La calle del domicilo no puede quedar vacío")
     private String calle;
@@ -19,12 +21,22 @@ public class DomicilioEntradaDto {
     @NotBlank(message = "La provincia del domicilo no puede quedar vacío")
     private String provincia;
 
-    public DomicilioEntradaDto() {}
-    public DomicilioEntradaDto(String calle, int numero, String localidad, String provincia) {
+    public DomicilioModificacionEntradaDto() {}
+
+    public DomicilioModificacionEntradaDto(Long id, String calle, Integer numero, String localidad, String provincia) {
+        this.id = id;
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
         this.provincia = provincia;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCalle() {
@@ -35,11 +47,11 @@ public class DomicilioEntradaDto {
         this.calle = calle;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

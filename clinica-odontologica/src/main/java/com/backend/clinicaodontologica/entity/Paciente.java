@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @Column(length = 50)
     private String nombre;
     @Column(length = 50)
@@ -31,11 +31,11 @@ public class Paciente {
         this.domicilio = domicilio;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

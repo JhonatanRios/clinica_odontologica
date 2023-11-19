@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Odontologo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @Column(length = 50)
     private String matricula;
     @Column(length = 50)
@@ -23,11 +23,11 @@ public class Odontologo {
         this.apellido = apellido;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

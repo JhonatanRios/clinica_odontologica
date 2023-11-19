@@ -1,10 +1,10 @@
 package com.backend.clinicaodontologica.repository;
 
-import com.backend.clinicaodontologica.entity.Paciente;
+import com.backend.clinicaodontologica.entity.Odontologo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Long> {
-    Paciente findByDni(int dni);
+public interface OdontologoRepository extends JpaRepository<Odontologo, Long> {
+    //Odontologo findById(Long id);
 }
