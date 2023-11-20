@@ -1,7 +1,7 @@
 package com.backend.clinicaodontologica.dto.modificacion;
 
-import com.backend.clinicaodontologica.entity.Odontologo;
-import com.backend.clinicaodontologica.entity.Paciente;
+import com.backend.clinicaodontologica.dto.entrada.odontologo.OdontologoEntradaDto;
+import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
@@ -18,18 +18,18 @@ public class TurnoModificacionEntradaDto {
     private LocalDateTime fechaYHora;
     @NotNull(message = "El odontólogo del turno no puede ser nulo")
     @Valid
-    private Odontologo odontologo;
+    private OdontologoEntradaDto odontologoEntradaDto;
     @NotNull(message = "El paciente del turno no puede ser nulo")
     @Valid
-    private Paciente paciente;
+    private PacienteEntradaDto pacienteEntradaDto;
 
     public TurnoModificacionEntradaDto() {}
 
-    public TurnoModificacionEntradaDto(Long id, LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+    public TurnoModificacionEntradaDto(Long id, LocalDateTime fechaYHora, OdontologoEntradaDto odontologoEntradaDto, PacienteEntradaDto pacienteEntradaDto) {
         this.id = id;
         this.fechaYHora = fechaYHora;
-        this.odontologo = odontologo;
-        this.paciente = paciente;
+        this.odontologoEntradaDto = odontologoEntradaDto;
+        this.pacienteEntradaDto = pacienteEntradaDto;
     }
 
     public Long getId() {
@@ -48,19 +48,19 @@ public class TurnoModificacionEntradaDto {
         this.fechaYHora = fechaYHora;
     }
 
-    public Odontologo getOdontologo() {
-        return odontologo;
+    public OdontologoEntradaDto getOdontologoEntradaDto() {
+        return odontologoEntradaDto;
     }
 
-    public void setOdontologo(Odontologo odontologo) {
-        this.odontologo = odontologo;
+    public void setOdontologoEntradaDto(OdontologoEntradaDto odontologoEntradaDto) {
+        this.odontologoEntradaDto = odontologoEntradaDto;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public PacienteEntradaDto getPacienteEntradaDto() {
+        return pacienteEntradaDto;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setPacienteEntradaDto(PacienteEntradaDto pacienteEntradaDto) {
+        this.pacienteEntradaDto = pacienteEntradaDto;
     }
 }

@@ -7,9 +7,9 @@ import com.backend.clinicaodontologica.dto.salida.turno.TurnoSalidaDto;
 import java.util.List;
 
 public interface ITurnoService {
-    TurnoSalidaDto registrarTurno(TurnoEntradaDto odontologo);
+    TurnoSalidaDto registrarTurno(TurnoEntradaDto turno);
     List<TurnoSalidaDto> listarTurnos();
     TurnoSalidaDto buscarTurnoPorId(Long id);
     void eliminarTurno(Long id);
-    TurnoSalidaDto actualizarTurno(TurnoModificacionEntradaDto paciente);
+    TurnoSalidaDto actualizarTurno(TurnoModificacionEntradaDto turno);
 }
