@@ -29,7 +29,7 @@ public class TurnoController {
 
 
     //GET
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TurnoSalidaDto> obtenerTurnoPorId(@PathVariable Long id){
         return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), HttpStatus.OK);
     }

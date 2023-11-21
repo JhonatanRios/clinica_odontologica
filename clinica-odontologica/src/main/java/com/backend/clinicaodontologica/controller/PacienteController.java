@@ -29,7 +29,7 @@ public class PacienteController {
 
 
     //GET
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PacienteSalidaDto> obtenerPacientePorId(@PathVariable Long id){
         return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
     }
