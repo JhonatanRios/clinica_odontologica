@@ -4,6 +4,7 @@ import com.backend.clinicaodontologica.dto.entrada.odontologo.OdontologoEntradaD
 import com.backend.clinicaodontologica.dto.modificacion.OdontologoModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.backend.clinicaodontologica.entity.Odontologo;
+import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinicaodontologica.repository.OdontologoRepository;
 import com.backend.clinicaodontologica.service.IOdontologoService;
 import com.backend.clinicaodontologica.utils.JsonPrinter;
@@ -66,16 +67,6 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public void eliminarOdontologo(Long id) {
-        if(odontologoRepository.findById(id).orElse(null) != null) {
-            odontologoRepository.deleteById(id);
-            LOGGER.warn("Se ha eliminado el odontólogo con id: {}", id);
-        } else {
-            LOGGER.error("No se ha encontrado el odontólogo con id {}", id);
-        }
-    }
-
-    @Override
     public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo) {
         Odontologo odontologoRecibido = modelMapper.map(odontologo, Odontologo.class);
         Odontologo odontologoAActualizar = odontologoRepository.findById(odontologoRecibido.getId()).orElse(null);
@@ -94,6 +85,17 @@ public class OdontologoService implements IOdontologoService {
         }
 
         return odontologoSalidaDto;
+    }
+
+    @Override
+    public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
+        if(odontologoRepository.findById(id).orElse(null) != null) {
+            odontologoRepository.deleteById(id);
+            LOGGER.warn("Se ha eliminado el odontólogo con id: {}", id);
+        } else {
+            LOGGER.error("No se ha encontrado el odontólogo con id {}", id);
+            throw new ResourceNotFoundException("No se ha encontrado el odontólogo con id: " + id);
+        }
     }
 
     private void configureMapping() {

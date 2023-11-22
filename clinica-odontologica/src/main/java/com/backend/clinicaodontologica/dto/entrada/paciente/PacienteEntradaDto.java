@@ -3,10 +3,7 @@ package com.backend.clinicaodontologica.dto.entrada.paciente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class PacienteEntradaDto {
@@ -19,7 +16,7 @@ public class PacienteEntradaDto {
     @Size(max = 50, message = "El apellido del paciente puede tener hasta 50 caracteres")
     private String apellido;
     @NotNull(message = "El dni del paciente no puede ser nulo")
-    @Size(max = 12, message = "El dni del paciente puede tener hasta 12 digitos")
+    @Digits(integer = 12, fraction = 0, message = "El dni del paciente puede tener hasta 12 dígitos")
     private Integer dni;
     @FutureOrPresent(message = "La fecha de ingreso del paciente no puede ser anterior al día de hoy")
     @NotNull(message = "La fecha de ingreso del paciente no puede ser nulo")

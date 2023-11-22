@@ -1,6 +1,6 @@
 package com.backend.clinicaodontologica.dto.modificacion;
 
-import com.backend.clinicaodontologica.dto.entrada.paciente.DomicilioEntradaDto;
+import com.backend.clinicaodontologica.dto.salida.paciente.DomicilioSalidaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
@@ -31,17 +31,17 @@ public class PacienteModificacionEntradaDto {
     private LocalDate fechaIngreso;
     @NotNull(message = "El domicilio del paciente no puede ser nulo")
     @Valid
-    private DomicilioEntradaDto domicilioEntradaDto;
+    private DomicilioSalidaDto domicilioSalidaDto;
 
     public PacienteModificacionEntradaDto() {}
 
-    public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilioEntradaDto) {
+    public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioSalidaDto domicilioSalidaDto) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
-        this.domicilioEntradaDto = domicilioEntradaDto;
+        this.domicilioSalidaDto = domicilioSalidaDto;
     }
 
     public Long getId() {
@@ -84,11 +84,11 @@ public class PacienteModificacionEntradaDto {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public DomicilioEntradaDto getDomicilioEntradaDto() {
-        return domicilioEntradaDto;
+    public DomicilioSalidaDto getDomicilioSalidaDto() {
+        return domicilioSalidaDto;
     }
 
-    public void setDomicilioEntradaDto(DomicilioEntradaDto domicilioEntradaDto) {
-        this.domicilioEntradaDto = domicilioEntradaDto;
+    public void setDomicilioSalidaDto(DomicilioSalidaDto domicilioSalidaDto) {
+        this.domicilioSalidaDto = domicilioSalidaDto;
     }
 }

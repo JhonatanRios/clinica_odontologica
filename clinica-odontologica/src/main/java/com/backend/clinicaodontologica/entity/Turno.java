@@ -12,10 +12,10 @@ public class Turno {
     private LocalDateTime fechaYHora;
     @ManyToOne
     @JoinColumn(name = "odontologo_id")
-    private Odontologo odontologo;
+    private Odontologo odontologo;  // Cambiado a tipo Odontologo
     @ManyToOne
     @JoinColumn(name = "paciente_id")
-    private Paciente paciente;
+    private Paciente paciente;  // Cambiado a tipo Paciente
 
     public Turno() {}
 
