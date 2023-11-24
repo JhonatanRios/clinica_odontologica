@@ -10,7 +10,7 @@ public class Domicilio {
         json -> dto Controlador dto -> servicio dto -> entidad -> repository (dao) -> entidad a BD -> repositoy -> servicio entidad a dto -> controlador -> dto @ResposeBody (dentro de @RestController) -> json
     */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 50)
     private String calle;

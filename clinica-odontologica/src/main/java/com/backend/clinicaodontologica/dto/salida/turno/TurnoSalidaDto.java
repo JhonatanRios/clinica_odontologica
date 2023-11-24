@@ -8,16 +8,16 @@ import java.time.LocalDateTime;
 public class TurnoSalidaDto {
     private Long id;
     private LocalDateTime fechaYHora;
-    private OdontologoSalidaDto odontologoSalidaDto;
-    private PacienteSalidaDto pacienteSalidaDto;
+    private OdontologoSalidaDto odontologo;
+    private PacienteSalidaDto paciente;
 
     public TurnoSalidaDto() {}
 
-    public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, OdontologoSalidaDto odontologoSalidaDto, PacienteSalidaDto pacienteSalidaDto) {
+    public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, OdontologoSalidaDto odontologo, PacienteSalidaDto paciente) {
         this.id = id;
         this.fechaYHora = fechaYHora;
-        this.odontologoSalidaDto = odontologoSalidaDto;
-        this.pacienteSalidaDto = pacienteSalidaDto;
+        this.odontologo = odontologo;
+        this.paciente = paciente;
     }
 
     public Long getId() {
@@ -36,24 +36,24 @@ public class TurnoSalidaDto {
         this.fechaYHora = fechaYHora;
     }
 
-    public OdontologoSalidaDto getOdontologoSalidaDto() {
-        return odontologoSalidaDto;
+    public OdontologoSalidaDto getOdontologo() {
+        return odontologo;
     }
 
-    public void setOdontologoSalidaDto(OdontologoSalidaDto odontologoSalidaDto) {
-        this.odontologoSalidaDto = odontologoSalidaDto;
+    public void setOdontologo(OdontologoSalidaDto odontologo) {
+        this.odontologo = odontologo;
     }
 
-    public PacienteSalidaDto getPacienteSalidaDto() {
-        return pacienteSalidaDto;
+    public PacienteSalidaDto getPaciente() {
+        return paciente;
     }
 
-    public void setPacienteSalidaDto(PacienteSalidaDto pacienteSalidaDto) {
-        this.pacienteSalidaDto = pacienteSalidaDto;
+    public void setPaciente(PacienteSalidaDto paciente) {
+        this.paciente = paciente;
     }
 
     @Override
     public String toString() {
-        return "id: " + id + " - fechaYHora: " + fechaYHora + " - odontologo: " + odontologoSalidaDto + " - paciente: " + pacienteSalidaDto + '.';
+        return "id: " + id + " - fechaYHora: " + fechaYHora + " - odontologo: " + odontologo + " - paciente: " + paciente + '.';
     }
 }

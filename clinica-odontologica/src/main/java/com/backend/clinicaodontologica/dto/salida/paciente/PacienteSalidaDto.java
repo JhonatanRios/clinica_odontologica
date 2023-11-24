@@ -8,17 +8,17 @@ public class PacienteSalidaDto {
     private String apellido;
     private int dni;
     private LocalDate fechaIngreso;
-    private DomicilioSalidaDto domicilioSalidaDto;
+    private DomicilioSalidaDto domicilio;
 
     public PacienteSalidaDto() {}
 
-    public PacienteSalidaDto(int id, String nombre, String apellido, int dni, LocalDate fechaIngreso, DomicilioSalidaDto domicilioSalidaDto) {
+    public PacienteSalidaDto(int id, String nombre, String apellido, int dni, LocalDate fechaIngreso, DomicilioSalidaDto domicilio) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
-        this.domicilioSalidaDto = domicilioSalidaDto;
+        this.domicilio = domicilio;
     }
 
     public int getId() {
@@ -61,16 +61,16 @@ public class PacienteSalidaDto {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public DomicilioSalidaDto getDomicilioSalidaDto() {
-        return domicilioSalidaDto;
+    public DomicilioSalidaDto getDomicilio() {
+        return domicilio;
     }
 
-    public void setDomicilioSalidaDto(DomicilioSalidaDto domicilioSalidaDto) {
-        this.domicilioSalidaDto = domicilioSalidaDto;
+    public void setDomicilio(DomicilioSalidaDto domicilio) {
+        this.domicilio = domicilio;
     }
 
     @Override
     public String toString() {
-        return "id: " + id + " - nombre: " + nombre + " - apellido: " + apellido + " - dni: " + dni + " - fechaIngreso: " + fechaIngreso + " - domicilioSalidaDto: " + domicilioSalidaDto + '.';
+        return "id: " + id + " - nombre: " + nombre + " - apellido: " + apellido + " - dni: " + dni + " - fechaIngreso: " + fechaIngreso + " - domicilioSalidaDto: " + domicilio + '.';
     }
 }

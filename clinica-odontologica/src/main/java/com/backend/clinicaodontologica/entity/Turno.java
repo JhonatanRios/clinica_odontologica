@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Table(name = "TURNOS")
 public class Turno {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime fechaYHora;
     @ManyToOne
@@ -19,7 +19,8 @@ public class Turno {
 
     public Turno() {}
 
-    public Turno(LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+    public Turno(Long id, LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+        this.id = id;
         this.fechaYHora = fechaYHora;
         this.odontologo = odontologo;
         this.paciente = paciente;

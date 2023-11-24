@@ -59,9 +59,7 @@ public class OdontologoService implements IOdontologoService {
         if (odontologoBuscado != null) {
             odontologoEncontrado = modelMapper.map(odontologoBuscado, OdontologoSalidaDto.class);
             LOGGER.info("Odontólogo encontrado: {}", JsonPrinter.toString(odontologoEncontrado));
-        } else {
-            LOGGER.error("El id no se encuentra registrado en la base de datos");
-        }
+        } else LOGGER.error("El id no se encuentra registrado en la base de datos");
 
         return odontologoEncontrado;
     }

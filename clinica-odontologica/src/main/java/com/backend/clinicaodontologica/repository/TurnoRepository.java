@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TurnoRepository extends JpaRepository<Turno, Long> {
-    //Turno findById(Long id);
-}
+public interface TurnoRepository extends JpaRepository<Turno, Long> {}

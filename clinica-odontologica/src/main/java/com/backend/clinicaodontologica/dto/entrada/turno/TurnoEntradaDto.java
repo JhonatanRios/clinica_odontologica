@@ -9,19 +9,20 @@ import java.time.LocalDateTime;
 public class TurnoEntradaDto {
     @FutureOrPresent(message = "La fecha y hora del turno no puede ser anterior al día de hoy")
     @NotNull(message = "La fecha y hora del turno del paciente no puede ser nulo")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime fechaYHora;
-    @NotNull(message = "El id del odontólogo del turno no puede ser nulo")
-    private Long idOdontologo;
-    @NotNull(message = "El id del paciente del turno no puede ser nulo")
-    private Long idPaciente;
+
+    @NotNull(message = "El id odontologo no puede ser nulo")
+    private Long idodontologo;
+    @NotNull(message = "El id paciente no puede ser nulo")
+    private Long idpaciente;
 
     public TurnoEntradaDto() {}
 
-    public TurnoEntradaDto(LocalDateTime fechaYHora, Long idOdontologo, Long idPaciente) {
+    public TurnoEntradaDto(LocalDateTime fechaYHora, Long idodontologo, Long idpaciente) {
         this.fechaYHora = fechaYHora;
-        this.idOdontologo = idOdontologo;
-        this.idPaciente = idPaciente;
+        this.idodontologo = idodontologo;
+        this.idpaciente = idpaciente;
     }
 
     public LocalDateTime getFechaYHora() {
@@ -32,19 +33,19 @@ public class TurnoEntradaDto {
         this.fechaYHora = fechaYHora;
     }
 
-    public Long getIdOdontologo() {
-        return idOdontologo;
+    public Long getIdodontologo() {
+        return idodontologo;
     }
 
-    public void setIdOdontologo(Long idOdontologo) {
-        this.idOdontologo = idOdontologo;
+    public void setIdodontologo(Long idodontologo) {
+        this.idodontologo = idodontologo;
     }
 
-    public Long getIdPaciente() {
-        return idPaciente;
+    public Long getIdpaciente() {
+        return idpaciente;
     }
 
-    public void setIdPaciente(Long idPaciente) {
-        this.idPaciente = idPaciente;
+    public void setIdpaciente(Long idpaciente) {
+        this.idpaciente = idpaciente;
     }
 }
