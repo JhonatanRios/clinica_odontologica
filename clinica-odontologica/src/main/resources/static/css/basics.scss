@@ -1,0 +1,19 @@
+nav {
+  position: sticky;
+  background: rgba(255, 255, 255, .3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .3);
+  top: 0;
+  ul {
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    li {
+      width: fit-content;
+      &:hover, & .active {
+        font-weight: 700;
+      }
+    }
+  }
+}
