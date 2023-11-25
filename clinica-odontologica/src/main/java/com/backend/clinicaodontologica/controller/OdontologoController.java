@@ -45,7 +45,7 @@ public class OdontologoController {
 
     //PUT
     @PutMapping("/actualizar")
-    public OdontologoSalidaDto actualizarOdontologo(@RequestBody OdontologoModificacionEntradaDto odontologo) {
+    public OdontologoSalidaDto actualizarOdontologo(@RequestBody OdontologoModificacionEntradaDto odontologo) throws ResourceNotFoundException {
         return odontologoService.actualizarOdontologo(odontologo);
     }
 

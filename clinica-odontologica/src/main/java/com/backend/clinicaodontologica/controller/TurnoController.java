@@ -45,7 +45,7 @@ public class TurnoController {
 
     //PUT
     @PutMapping("/actualizar")
-    public TurnoSalidaDto actualizarTurno(@RequestBody TurnoModificacionEntradaDto turno) throws ResourceNotFoundException {
+    public TurnoSalidaDto actualizarTurno(@RequestBody TurnoModificacionEntradaDto turno) throws ResourceNotFoundException, BadRequestException {
         return turnoService.actualizarTurno(turno);
     }
 

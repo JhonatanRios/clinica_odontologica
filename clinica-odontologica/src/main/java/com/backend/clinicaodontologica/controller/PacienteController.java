@@ -3,6 +3,7 @@ package com.backend.clinicaodontologica.controller;
 import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.backend.clinicaodontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
+import com.backend.clinicaodontologica.exceptions.BadRequestException;
 import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinicaodontologica.service.IPacienteService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class PacienteController {
 
     //POST
     @PostMapping("/registrar")
-    public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
+    public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente) throws BadRequestException {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
 
@@ -44,7 +45,7 @@ public class PacienteController {
 
     //PUT
     @PutMapping("/actualizar")
-    public PacienteSalidaDto actualizarPaciente(@RequestBody PacienteModificacionEntradaDto paciente) {
+    public PacienteSalidaDto actualizarPaciente(@RequestBody PacienteModificacionEntradaDto paciente) throws ResourceNotFoundException {
         return pacienteService.actualizarPaciente(paciente);
     }
 
