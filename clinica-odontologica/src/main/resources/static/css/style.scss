@@ -65,6 +65,7 @@ a {
     .card {
       flex: 1 1 250px; /*  Stretching: */
       flex: 0 1 250px; /*  No stretching: */
+      height: 200px;
       img {
         border-radius: 50%;
       }

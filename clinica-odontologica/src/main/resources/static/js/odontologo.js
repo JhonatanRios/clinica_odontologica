@@ -47,4 +47,9 @@ const opciones = [
   
   console.log(contCards);
   
-  const listar = document.querySelector
+  const listar = document.querySelector("#odontologosCard");
+  
+  listar.forEach(function (child) {
+    
+})
+
