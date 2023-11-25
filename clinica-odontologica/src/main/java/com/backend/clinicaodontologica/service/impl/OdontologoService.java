@@ -4,6 +4,7 @@ import com.backend.clinicaodontologica.dto.entrada.odontologo.OdontologoEntradaD
 import com.backend.clinicaodontologica.dto.modificacion.OdontologoModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.backend.clinicaodontologica.entity.Odontologo;
+import com.backend.clinicaodontologica.exceptions.BadRequestException;
 import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinicaodontologica.repository.OdontologoRepository;
 import com.backend.clinicaodontologica.service.IOdontologoService;
@@ -28,7 +29,7 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo) {
+    public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo) throws BadRequestException {
         LOGGER.info("OdontologoEntradaDto: " + JsonPrinter.toString(odontologo));
 
         // Convertir de OdontologoEntradaDto a Entidad por medio del mapper
@@ -39,7 +40,10 @@ public class OdontologoService implements IOdontologoService {
         OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoAPersistir, OdontologoSalidaDto.class);
 
         LOGGER.info("OdontologoSalidaDto: " + JsonPrinter.toString(odontologoSalidaDto));
-        return odontologoSalidaDto;
+
+        if (odontologoSalidaDto != null) {
+            return odontologoSalidaDto;
+        } else throw new BadRequestException("No se pudo registrar al odontólogo");
     }
 
     @Override
@@ -65,7 +69,8 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo) {
+    public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo) throws ResourceNotFoundException {
+        LOGGER.warn("Odontólogo para actualizar: {}", JsonPrinter.toString(odontologo));
         Odontologo odontologoRecibido = modelMapper.map(odontologo, Odontologo.class);
         Odontologo odontologoAActualizar = odontologoRepository.findById(odontologoRecibido.getId()).orElse(null);
         OdontologoSalidaDto odontologoSalidaDto = null;
@@ -78,8 +83,8 @@ public class OdontologoService implements IOdontologoService {
 
             LOGGER.warn("Odontólogo actualizado: {}", JsonPrinter.toString(odontologoSalidaDto));
         } else {
-            LOGGER.error("No fue posible actualizar el odontólogo porque no se encuentra en nuestra base de datos");
-            // excepcion correspondiente
+            LOGGER.error("No se encontró el odontólogo para actualizar");
+            throw new ResourceNotFoundException("No se encontró el odontólogo para actualizar");
         }
 
         return odontologoSalidaDto;

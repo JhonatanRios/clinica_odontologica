@@ -4,6 +4,7 @@ import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.backend.clinicaodontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.backend.clinicaodontologica.entity.Paciente;
+import com.backend.clinicaodontologica.exceptions.BadRequestException;
 import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinicaodontologica.repository.PacienteRepository;
 import com.backend.clinicaodontologica.service.IPacienteService;
@@ -29,7 +30,7 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) {
+    public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) throws BadRequestException {
         LOGGER.info("PacienteEntradaDto: " + JsonPrinter.toString(paciente));
 
         // Convertir de PacienteEntradaDto a Entidad por medio del mapper
@@ -40,7 +41,10 @@ public class PacienteService implements IPacienteService {
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteAPersistir, PacienteSalidaDto.class);
 
         LOGGER.info("PacienteSalidaDto: " + JsonPrinter.toString(pacienteSalidaDto));
-        return pacienteSalidaDto;
+
+        if (pacienteSalidaDto != null) {
+            return pacienteSalidaDto;
+        } else throw new BadRequestException("No se pudo registrar al paciente");
     }
 
     @Override
@@ -66,7 +70,8 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto paciente) {
+    public PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto paciente) throws ResourceNotFoundException {
+        LOGGER.info("Paciente para actualizar: {}", JsonPrinter.toString(paciente));
         Paciente pacienteRecibido = modelMapper.map(paciente, Paciente.class);
         PacienteSalidaDto pacienteSalidaDto = null;
 
@@ -79,8 +84,8 @@ public class PacienteService implements IPacienteService {
 
             LOGGER.warn("Paciente actualizado: {}", JsonPrinter.toString(pacienteSalidaDto));
         } else {
-            LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
-            // excepcion correspondiente
+            LOGGER.error("No se encontró el paciente para actualizar");
+            throw new ResourceNotFoundException("No se encontró el paciente para actualizar");
         }
 
         return pacienteSalidaDto;

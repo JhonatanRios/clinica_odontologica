@@ -24,13 +24,19 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> procesarValidationException(MethodArgumentNotValidException ex) {
         Map<String, String> mensaje = new HashMap<>();
-
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String errorName = ((FieldError) error).getField();
             String errorMensaje = error.getDefaultMessage();
             mensaje.put(errorName, errorMensaje);
         });
+        return mensaje;
+    }
 
+    @ExceptionHandler({BadRequestException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> manejarBadRequestException(BadRequestException ex){
+        Map<String, String> mensaje = new HashMap<>();
+        mensaje.put("mensaje", "Requerimiento mal hecho: "+ ex.getMessage());
         return mensaje;
     }
 }
