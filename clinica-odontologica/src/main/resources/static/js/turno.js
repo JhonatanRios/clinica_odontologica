@@ -1,21 +1,21 @@
 const opciones = [
     {
       imagen: './assets/odontologo/registro.png',
-      tipo: 'Registrar paciente',
+      tipo: 'Registrar turno',
       link: './odontologo.html',
       descrip: 'Aqui podras registrar, listar, buscar por id, actualizar y eliminar registros'
     },
     {
       imagen: './assets/odontologo/listar.png',
-      tipo: 'Listar paciente',
+      tipo: 'Listar turno',
       link: './odontologo.html',
-      descrip: 'Aqui podras listar pacientes'
+      descrip: 'Aqui podras listar turnos'
     },
     {
       imagen: './assets/odontologo/buscar.png',
-      tipo: 'Buscar paciente por Id',
+      tipo: 'Buscar turno por Id',
       link: './turno.html',
-      descrip: 'Aqui podras buscar pacientes por id'
+      descrip: 'Aqui podras buscar turnos por id'
     },
     {
         imagen: './assets/odontologo/eliminar.png',
@@ -46,5 +46,4 @@ const opciones = [
   cargarCardOpciones();
   
   console.log(contCards);
-  
   

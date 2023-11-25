@@ -9,7 +9,7 @@ const opciones = [
       imagen: './assets/odontologo/listar.png',
       tipo: 'Listar odontólogos',
       link: './odontologo.html',
-      descrip: 'Aqui podras registrar odontólogos'
+      descrip: 'Aqui podras listar odontólogos'
     },
     {
       imagen: './assets/odontologo/buscar.png',
@@ -47,4 +47,4 @@ const opciones = [
   
   console.log(contCards);
   
-  
+  const listar = document.querySelector
