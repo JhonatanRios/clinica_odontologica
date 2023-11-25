@@ -40,3 +40,4 @@ const cargarCardEntidades = () => {
 cargarCardEntidades();
 
 console.log(contCards);
+

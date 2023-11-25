@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TurnoService implements ITurnoService {
@@ -88,7 +89,23 @@ public class TurnoService implements ITurnoService {
 
     @Override
     public TurnoSalidaDto actualizarTurno(TurnoModificacionEntradaDto turno) throws ResourceNotFoundException {
-        return null;
+        Turno turnoRecibido = modelMapper.map(turno, Turno.class);
+        TurnoSalidaDto turnoSalidaDto = null;
+
+        // Guardar directamente, reemplazando todos los campos
+        Optional<Turno> turnoEncontrado = turnoRepository.findById(turnoRecibido.getId());
+        if (turnoEncontrado.isPresent()) {
+            turnoRepository.save(turnoRecibido);
+
+            turnoSalidaDto = modelMapper.map(turnoRecibido, TurnoSalidaDto.class);
+
+            LOGGER.warn("Paciente actualizado: {}", JsonPrinter.toString(turnoSalidaDto));
+        } else {
+            LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
+            // excepcion correspondiente
+        }
+
+        return turnoSalidaDto;
     }
 
     @Override

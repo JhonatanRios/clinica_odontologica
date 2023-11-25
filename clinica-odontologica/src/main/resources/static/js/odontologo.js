@@ -1,24 +1,24 @@
 const opciones = [
     {
-      imagen: './assets/registro.png',
+      imagen: './assets/odontologo/registro.png',
       tipo: 'Registrar odontólogo',
       link: './odontologo.html',
       descrip: 'Aqui podras registrar, listar, buscar por id, actualizar y eliminar registros'
     },
     {
-      imagen: './assets/lista.png',
+      imagen: './assets/odontologo/listar.png',
       tipo: 'Listar odontólogos',
       link: './odontologo.html',
       descrip: 'Aqui podras registrar odontólogos'
     },
     {
-      imagen: './assets/turno.png',
+      imagen: './assets/odontologo/buscar.png',
       tipo: 'Buscar por Id',
       link: './turno.html',
       descrip: 'Aqui podras buscar odontólogos por id'
     },
     {
-        imagen: './assets/turno.png',
+        imagen: './assets/odontologo/eliminar.png',
         tipo: 'Actualizar y eliminar registros',
         link: './turno.html',
         descrip: 'Aqui podras actualizar y eliminar registros de odontólogos'
