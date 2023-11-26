@@ -1,3 +1,8 @@
+body {
+  position: relative;
+  overflow: auto;
+}
+
 nav {
   position: sticky;
   background: rgba(255, 255, 255, .3);
@@ -11,9 +16,206 @@ nav {
     justify-content: flex-end;
     li {
       width: fit-content;
+      font-size: 12px;
       &:hover, & .active {
         font-weight: 700;
       }
     }
+  }
+}
+
+.pl--15 {
+  padding: 0 0 0 15px;
+}
+
+.cont {
+  &-list {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
+  &-btns {
+    .btn {
+      position: relative;
+      height: fit-content;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      * {
+        color: #fff;
+      }
+      &.load::before {
+        top: 0;
+        left: 0;
+      } 
+    }
+  }
+  &-crear {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    .crear {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 5px 5px 0 rgba(0,0,0,.3);
+      * {
+        color: #fff;
+      }
+      &:hover {
+        box-shadow: 0 0 10px 0px rgba(0,0,0,.7);
+      }
+    }
+  }
+}
+
+.entidad {
+  width: fit-content;
+  .info {
+    text-align: center;
+  }
+}
+
+// buscador por id
+.title {
+  .buscar {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    place-items: center flex-end;
+    .btn {
+      cursor: pointer;
+      position: absolute;
+      border-style: none;
+      outline: none;
+      background-color:transparent;
+      pointer-events: painted;
+      right: 5px;
+      &:focus ~ input {
+        width: 180px;
+        border-bottom: 1px solid rgba(121, 119, 119, .5);
+        transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+      }
+    }
+    input {
+      height: 25px;
+      width: 25px;
+      border-style: none;
+      padding: 10px 20px 5px 5px;
+      letter-spacing: 2px;
+      outline: none;
+      background-color: transparent;
+      transition: all .5s ease-in-out;
+      &::placeholder {
+        letter-spacing: 2px;
+        font-weight: 100;
+      }
+      &:focus {
+        width: 180px;
+        border-bottom: 1px solid rgba(121, 119, 119, .5);
+        transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+      }
+    }
+  }
+}
+
+//Lista de elementos
+.item {
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  .info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    .image {
+      height: 60px;
+      width: 60px;
+      border: 1px solid #d9d9d9;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: min(60px, 100%);
+      }
+    }
+    .details {
+      span, details {
+        font-size: 16px;
+        line-height: 1;
+      }
+      .id {
+        font-size: 10px;
+      }
+      details {
+        sumary {
+          
+        }
+      }
+    }
+  }
+}
+
+
+
+.load {
+  position: relative;
+  background: #d9d9d9 !important;
+  color: #d9d9d9 !important;
+  * {
+    color: #d9d9d9 !important;
+  }
+  border-radius: 25px;
+  img {
+    display: none;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #d9d9d9 0%, rgba(0, 0, 0, 0.05) 20%, #d9d9d9 40%, #d9d9d9 100%) no-repeat;
+    background-size: 450px 400px;
+    border-radius: 25px;
+    animation: shimmer 1.5s linear infinite;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+
+
+.bg {
+  &--blue {
+    background: #008cba;
+  }
+  &--red {
+    background: #f44336;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  nav ul li {
+    font-size: 16px;
+  }
+
+  .entidad {
+    grid-template-columns: 120px 1fr;
+    .info {
+      text-align: left;
+    }
+  }
+  .title {
+    grid-template-columns: 1fr auto;
+  }
+  .item {
+    grid-template-columns: 1fr auto;
   }
 }
