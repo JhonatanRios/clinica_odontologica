@@ -1,21 +1,86 @@
 const urlOdontologo = `${urlApi}/odontologos`;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Llamada a la API local para obtener todos los odontólogos
+  // Listar todos
   realizarPeticion('GET', `${urlOdontologo}/listar`).then(data => {
-    // Mostrar los odontólogos en el div
-    data.length === 0 ? contListar.innerHTML = '<p class="txt--center">No hay datos disponibles.</p>' : listarCards(data, contListar, 'odontologo');
+    data.length === 0 ? contListar.innerHTML = '<p class="txt--center p--15">No hay datos disponibles.</p>' : listarCards(data, contListar);
   })
   .catch(error => {
     console.error('Error al obtener los odontólogos:', error);
     contListar.innerHTML = 'Error al cargar los odontólogos.';
   });
 });
+// Registrar
+function registrarOdontologo(datos) {
+  realizarPeticion('POST', `${urlOdontologo}/registrar`, datos).then(() => {
+    return realizarPeticion('GET', `${urlOdontologo}/listar`);
+  })
+  .then(data => {
+    listarCards(data, contListar);
+  })
+  .catch(error => {
+    console.error('Error al registrar al odontólogo:', error);
+  });
+}
+// Buscar por ID
+function buscarPorIdOdontologo(id) {
+  realizarPeticion('GET', `${urlOdontologo}/${id}`).then(data => {
+    const dataArray = Array.isArray(data) ? data : [data];
+    listarCards(dataArray, contListar);
+  })
+  .catch(error => {
+    console.error('ID no encontrado:', error);
+    contListar.innerHTML = `<p class="txt--center">ID #${id} no encontrado</p>`;
+  });
+}
+// Actualizar
+function modalActualizar(id) {
+  console.log('clic en el item' + id);
+}
+// Eliminar
+function eliminarOdontologo(id) {
+  realizarPeticion('DELETE', `${urlOdontologo}/eliminar/${id}`)
+    .then(() => {
+      Swal.fire(
+        'Eliminado',
+        'El odontólogo ha sido eliminado correctamente.',
+        'success'
+      );
+      return realizarPeticion('GET', `${urlOdontologo}/listar`);
+    })
+    .then(data => {
+      // Actualizar la lista después de la eliminación
+      listarCards(data, contListar);
+    })
+    .catch(error => {
+      console.error('Error al eliminar al odontólogo: ', error);
+    });
+}
 
 
 
-// Listar Todos
-function crearCardOdontologo(item) {
+
+
+// Templates
+// Form
+function formOdontologo() {
+  modalCrear(() => `
+    <form class="d-grid g--10" id="registroForm">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido" required>
+      <label for="matricula">Matrícula:</label>
+      <input type="text" id="matricula" name="matricula" required>
+    </form>
+  `, (datos) => {
+    if (datos) {
+      registrarOdontologo(datos);
+    }
+  });
+}
+// Card
+function cardOdontologo(item) {
   return `
     <div class="info">
       <div class="image load">
@@ -28,61 +93,8 @@ function crearCardOdontologo(item) {
       </div>
     </div>
     <div class="d-flex cont-btns g--10">
-      <button class="bg--blue btn load" onclick="modalActualizar()"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
-      <button class="bg--red btn load" onclick="confirmarEliminacion()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      <button class="bg--blue btn load" onclick="modalActualizar(${item.id})"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+      <button class="bg--red btn load" onclick="confirmarEliminar(${item.id})"><i class="fa fa-trash" aria-hidden="true"></i></button>
     </div>
   `;
-}
-
-
-
-// Crear
-function modalCrear() {
-  Swal.fire({
-    title: 'Registro',
-    html: `
-      <form id="registroForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br>
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required>
-        <br>
-        <label for="matricula">Matrícula:</label>
-        <input type="text" id="matricula" name="matricula" required>
-      </form>
-    `,
-    showCancelButton: true,
-    confirmButtonText: 'Registrar',
-    cancelButtonText: 'Cancelar',
-    preConfirm: () => {
-      const nombreInput = Swal.getPopup().querySelector('#nombre');
-      const apellidoInput = Swal.getPopup().querySelector('#apellido');
-      const matriculaInput = Swal.getPopup().querySelector('#matricula');
-
-      // Obtener los valores de los campos
-      const nombre = nombreInput.value.trim();
-      const apellido = apellidoInput.value.trim();
-      const matricula = matriculaInput.value.trim();
-
-      // Validar que los campos no estén vacíos
-      if (!nombre || !apellido || !matricula) {
-        Swal.showValidationMessage('Por favor, completa todos los campos.');
-        return false;
-      }
-
-      // Si todo está validado, puedes hacer algo con los datos
-      console.log('Nombre:', nombre);
-      console.log('Apellido:', apellido);
-      console.log('Matrícula:', matricula);
-
-      return { nombre, apellido, matricula };
-    }
-  }).then((result) => {
-    // Si el usuario hizo clic en "Registrar" y las validaciones pasaron
-    if (result.isConfirmed && result.value) {
-      // Aquí puedes hacer algo con los datos
-      console.log('Datos registrados:', result.value);
-    }
-  });
 }

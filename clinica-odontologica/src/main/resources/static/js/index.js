@@ -1,17 +1,17 @@
 const entidades = [
   {
     imagen: './assets/odontologo.png',
-    tipo: 'Odontólogo',
+    tipo: 'Odontólogos',
     link: './odontologo.html'
   },
   {
     imagen: './assets/paciente.png',
-    tipo: 'Paciente',
+    tipo: 'Pacientes',
     link: './paciente.html'
   },
   {
     imagen: './assets/turno.png',
-    tipo: 'Turno',
+    tipo: 'Turnos',
     link: './turno.html'
   }
 ]

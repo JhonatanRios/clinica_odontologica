@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Llamada a la API local para obtener todos los odontólogos
   realizarPeticion('GET', `${urlTurnos}/listar`).then(data => {
     // Mostrar los odontólogos en el div
-    data.length === 0 ? contListar.innerHTML = '<p class="txt--center">No hay datos disponibles.</p>' : listarCards(data, contListar, 'turno');
+    data.length === 0 ? contListar.innerHTML = '<p class="txt--center p--15">No hay datos disponibles.</p>' : listarCards(data, contListar);
   })
   .catch(error => {
     console.error('Error al obtener los turnos:', error);
@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Listar Todos
-function crearCardTurno(item) {
+// Templates
+// Card
+function cardTurno(item) {
   return `
     <div class="info">
       <div class="image load">
@@ -23,6 +24,7 @@ function crearCardTurno(item) {
       </div>
       <div class="d-grid details g--10">
         <span class="id load"><strong>Id: ${item.id}</strong></span>
+        <span class="load"><strong>Fecha y hora:</strong> ${formatearFecha(item.fechaYHora)} ${formatearHora(item.fechaYHora)}</span>
         <span class="load"><strong>Odontologo:</strong> ${item.odontologo.nombre} ${item.odontologo.apellido}</span>
         <span class="load"><strong>Paciente:</strong> ${item.paciente.nombre} ${item.paciente.apellido}</span>
         <details class="load">

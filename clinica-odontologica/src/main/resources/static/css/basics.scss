@@ -1,6 +1,13 @@
+@use '_modals.scss';
 body {
   position: relative;
   overflow: auto;
+}
+
+header {
+  h2 {
+    line-height: 1;
+  }
 }
 
 nav {
@@ -31,7 +38,7 @@ nav {
 .cont {
   &-list {
     overflow-y: auto;
-    max-height: 60vh;
+    max-height: 80vh;
   }
   &-btns {
     .btn {
@@ -56,7 +63,6 @@ nav {
     left: 50%;
     transform: translateX(-50%);
     .crear {
-      cursor: pointer;
       width: 40px;
       height: 40px;
       border-radius: 20px;
@@ -70,6 +76,18 @@ nav {
       }
     }
   }
+}
+
+.line {
+  width: 90%;
+  height: 2px;
+  background: #d9d9d9;
+  border-radius: 2px;
+  margin: 0 auto 15px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .entidad {
@@ -87,7 +105,6 @@ nav {
     position: relative;
     place-items: center flex-end;
     .btn {
-      cursor: pointer;
       position: absolute;
       border-style: none;
       outline: none;
@@ -212,10 +229,7 @@ nav {
       text-align: left;
     }
   }
-  .title {
-    grid-template-columns: 1fr auto;
-  }
-  .item {
+  .title, .item {
     grid-template-columns: 1fr auto;
   }
 }

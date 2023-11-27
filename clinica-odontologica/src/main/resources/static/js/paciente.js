@@ -1,10 +1,9 @@
 const urlPacientes = `${urlApi}/pacientes`;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Llamada a la API local para obtener todos los odontólogos
+  // Listar todos
   realizarPeticion('GET', `${urlPacientes}/listar`).then(data => {
-    // Mostrar los odontólogos en el div
-    data.length === 0 ? contListar.innerHTML = '<p class="txt--center">No hay datos disponibles.</p>' : listarCards(data, contListar, 'paciente');
+    data.length === 0 ? contListar.innerHTML = '<p class="txt--center p--15">No hay datos disponibles.</p>' : listarCards(data, contListar);
   })
   .catch(error => {
     console.error('Error al obtener los pacientes:', error);
@@ -14,8 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Listar Todos
-function crearCardPaciente(item) {
+// Templates
+// Card
+function cardPaciente(item) {
   return `
     <div class="info">
       <div class="image load">
@@ -31,6 +31,10 @@ function crearCardPaciente(item) {
           <span><strong>Dirección:</strong> ${item.domicilio.calle} ${item.domicilio.numero} / ${item.domicilio.localidad} - ${item.domicilio.provincia}</span>
         </details>
       </div>
+    </div>
+    <div class="d-flex cont-btns g--10">
+      <button class="bg--blue btn load" onclick="modalActualizar(${item.id})"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+      <button class="bg--red btn load" onclick="confirmarEliminar(${item.id})"><i class="fa fa-trash" aria-hidden="true"></i></button>
     </div>
   `;
 }

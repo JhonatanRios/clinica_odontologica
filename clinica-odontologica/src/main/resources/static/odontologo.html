@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="./css/basics.css" />
   </head>
   <body>
+    <header class="d-grid center-start p--15">
+      <h2>Clínica <br> Odontológica</h2>
+    </header>
     <nav class="p--15">
       <ul class="d-flex g--10 m--0">
         <li class="txt--center"><a href="./index.html">Home</a></li>
@@ -23,7 +26,7 @@
         <li class="txt--center"><a href="./turno.html">Turnos</a></li>
       </ul>
     </nav>
-    <header class="d-grid center">
+    <div class="d-grid center">
       <div class="d-grid center-start entidad g--10 p--15">
         <img class="img--entidad" src="./assets/odontologo.png" alt="Odontólogo" />
         <div class="info">
@@ -31,7 +34,7 @@
           <p class="legal">En esta pagina podras trabajar con los odontólogos</p>
         </div>
       </div>
-    </header>
+    </div>
     <main class="p--15 mb--30">
       <div class="d-grid center-start title g--10 mb--15">
         <p>Listado de Odontólogos</p>
@@ -40,10 +43,11 @@
           <input type="text" placeholder="Buscar por id..." id="buscar">
         </div>
       </div>
+      <span class="d-flex line"></span>
       <div class="d-grid cont-list g--10" id="listarAll"></div>
     </main>
     <div class="d-grid center cont-crear">
-      <button class="bg--blue crear" onclick="modalCrear()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      <button class="bg--blue crear" onclick="formOdontologo()"><i class="fa fa-plus" aria-hidden="true"></i></button>
     </div>
     <script src="./js/app.js"></script>
     <script src="./js/odontologo.js"></script>
