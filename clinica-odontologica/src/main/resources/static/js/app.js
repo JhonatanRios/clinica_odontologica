@@ -6,6 +6,8 @@ const inputBuscar = document.getElementById('buscar');
 
 const entidad = entidadUrl(urlActual);
 
+
+
 // Peticiones Fetch
 async function realizarPeticion(metodo, url, datos = null) {
   const opciones = {
@@ -25,7 +27,6 @@ async function realizarPeticion(metodo, url, datos = null) {
     return response.json();
   } else return response.text();
 }
-
 
 
 
@@ -92,27 +93,59 @@ function listarCards(data, div) {
   }, 1000);
 }
 // Buscar por ID
+function buscarPorId(id) {
+  realizarPeticion('GET', `${urlApi}/${entidad}s/${id}`).then(data => {
+    const dataArray = Array.isArray(data) ? data : [data];
+    listarCards(dataArray, contListar);
+    switch (entidad) {
+      case 'odontologo':
+        odontologoLocal(dataArray);
+        break;
+      case 'paciente':
+        pacienteLocal(dataArray);
+        break;
+      default:
+        break;
+    }
+  })
+  .catch(error => {
+    console.error('ID no encontrado:', error);
+    contListar.innerHTML = `<p class="txt--center">ID #${id} no encontrado</p>`;
+  });
+}
 inputBuscar.addEventListener('input', () => {
   const searchTerm = inputBuscar.value.trim();
   if (searchTerm !== '') {
-    switch (entidad) {
-      case "odontologo":
-        buscarPorIdOdontologo(searchTerm);
-        break;
-      case "paciente":
-        // Lógica para el caso de paciente
-        console.log("Es una página de paciente");
-        break;
-      case "turno":
-        // Lógica para el caso de turno
-        console.log("Es una página de turno");
-        break;
-      default:
-        console.error("No se reconoce la entidad en la URL");
-        break;
-    }
+    buscarPorId(searchTerm);
   }
 });
+// Actualizar
+function modalActualizar(actualizarContenido, callback) {
+  Swal.fire({
+    title: 'Actualizar',
+    html: actualizarContenido(),
+    showCancelButton: true,
+    confirmButtonText: 'Actualizar',
+    cancelButtonText: 'Cancelar',
+    preConfirm: () => {
+      let datosValidados;
+
+      switch (entidad) {
+        case 'odontologo':
+          datosValidados = validarOdontologo();
+          break;
+        default:
+          break;
+      }
+
+      return datosValidados;
+    }
+  }).then((result) => {
+    if (result.isConfirmed && result.value) {
+      callback(result.value);
+    }
+  });
+}
 // Eliminar
 function confirmarEliminar(id) {
   Swal.fire({
@@ -130,12 +163,10 @@ function confirmarEliminar(id) {
           eliminarOdontologo(id);
           break;
         case "paciente":
-          // Lógica para el caso de paciente
-          console.log("Es una página de paciente");
+          eliminarPaciente(id);
           break;
         case "turno":
-          // Lógica para el caso de turno
-          console.log("Es una página de turno");
+          eliminarTurno(id);
           break;
         default:
           console.error("No se reconoce la entidad en la URL");
@@ -177,15 +208,20 @@ function esNumero(cadena) {
   return !isNaN(cadena);
 }
 // Formatear fecha y hora
-function formatearFecha(fecha) {
+function ajustarFechaUTC(fecha) {
   const fechaObj = new Date(fecha);
-  const dia = fechaObj.getDate();
-  const mes = fechaObj.getMonth() + 1;
-  const anio = fechaObj.getFullYear();
+  return new Date(fechaObj.getUTCFullYear(), fechaObj.getUTCMonth(), fechaObj.getUTCDate());
+}
+function formatearFecha(fecha) {
+  const fechaAjustada = ajustarFechaUTC(fecha);
+  const dia = fechaAjustada.getDate();
+  const mes = fechaAjustada.getMonth() + 1;
+  const anio = fechaAjustada.getFullYear();
   const diaFormateado = dia < 10 ? `0${dia}` : dia;
   const mesFormateado = mes < 10 ? `0${mes}` : mes;
   return `${diaFormateado}-${mesFormateado}-${anio}`;
 }
+
 function formatearHora(fecha) {
   const fechaObj = new Date(fecha);
   const opcionesHora = { hour: '2-digit', minute: '2-digit' };

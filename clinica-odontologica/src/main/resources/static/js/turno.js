@@ -1,18 +1,43 @@
-const urlTurnos = `${urlApi}/turnos`;
+const urlTurno = `${urlApi}/turnos`;
+let turnos = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Llamada a la API local para obtener todos los odontólogos
-  realizarPeticion('GET', `${urlTurnos}/listar`).then(data => {
-    // Mostrar los odontólogos en el div
-    data.length === 0 ? contListar.innerHTML = '<p class="txt--center p--15">No hay datos disponibles.</p>' : listarCards(data, contListar);
-  })
-  .catch(error => {
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const data = await realizarPeticion('GET', `${urlTurno}/listar`);
+    if (data.length === 0) {
+      contListar.innerHTML = '<p class="txt--center p--15">No hay datos disponibles.</p>';
+    } else {
+      listarCards(data, contListar);
+      turnoLocal(data);
+    }
+  } catch (error) {
     console.error('Error al obtener los turnos:', error);
     contListar.innerHTML = 'Error al cargar los turnos.';
-  });
+  }
 });
+// Eliminar
+function eliminarTurno(id) {
+  realizarPeticion('DELETE', `${urlTurno}/eliminar/${id}`).then(() => {
+    Swal.fire(
+      'Eliminado',
+      'El turno ha sido eliminado correctamente.',
+      'success'
+    );
+    return realizarPeticion('GET', `${urlTurno}/listar`);
+  })
+  .then(data => {
+    listarCards(data, contListar);
+    turnoLocal(data);
+  })
+  .catch(error => {
+    console.error('Error al eliminar al turno: ', error);
+  });
+}
 
 
+function turnoLocal(data) {
+  turnos = data;
+}
 
 // Templates
 // Card
@@ -51,8 +76,8 @@ function cardTurno(item) {
       </div>
     </div>
     <div class="d-flex cont-btns g--10">
-      <button class="bg--blue btn load" onclick="modalActualizar()"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
-      <button class="bg--red btn load" onclick="confirmarEliminacion()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    <button class="bg--blue btn load" onclick="formActualizarTurno(${item.id})"><i class="fa fa-refresh" aria-hidden="true"></i> Actualizar</button>
+    <button class="bg--red btn load" onclick="confirmarEliminar(${item.id})"><i class="fa fa-trash" aria-hidden="true"></i></button>
     </div>
   `;
 }
