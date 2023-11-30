@@ -23,7 +23,7 @@ class PacienteServiceTest {
     @Test
     @Order(1)
     void deberiaRegistrarPacienteNombreSofi_retornarId() throws BadRequestException {
-        PacienteEntradaDto pacienteEntradaDto = new PacienteEntradaDto("Sofi", "Perez", 123456, LocalDate.of(2023, 12, 24), new DomicilioEntradaDto("calle", 1234, "Localidad", "Provincia"));
+        PacienteEntradaDto pacienteEntradaDto = new PacienteEntradaDto("Amalia", "Perez", 123456, LocalDate.of(2023, 12, 24), new DomicilioEntradaDto("Av. Cabildo", 124, "Núñez", "Buenos Aires"));
 
         PacienteSalidaDto pacienteSalidaDto = pacienteService.registrarPaciente(pacienteEntradaDto);
 
